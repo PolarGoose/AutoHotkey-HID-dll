@@ -1,0 +1,34 @@
+import "oaidl.idl";
+import "ocidl.idl";
+
+[object, uuid(C14DB170-A181-4471-9173-8A7949AE1D09), dual, nonextensible, pointer_default(unique)]
+interface ITestParameterInterface : IDispatch
+{
+  [id(1)] HRESULT Foo([in] BSTR msg);
+};
+
+[object, uuid(563DABDD-9D1C-4865-8564-00CCB3A1777F), dual, nonextensible, pointer_default(unique)]
+interface ITestInterface : IDispatch
+{
+  [id(1)] HRESULT TestMethod([in] IDispatch* function);
+};
+
+[uuid(CD7FDE52-5F07-4C79-B473-789BF6429965), version(1.0)]
+library AutoHotkeyHidLib
+{
+  importlib("stdole2.tlb");
+
+  [uuid(76C3DAC8-F66E-4AED-9225-C6A9B9905B46)]
+  coclass TestClass
+  {
+    [default] interface ITestInterface;
+  };
+
+  [uuid(ECB4DB7D-1DD1-498F-B600-3680278BEBE2)]
+  coclass TestParameterClass
+  {
+    [default] interface ITestParameterInterface;
+  };
+};
+
+import "shobjidl.idl";

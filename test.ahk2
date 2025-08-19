@@ -1,0 +1,14 @@
+#Requires AutoHotkey v2.0
+#DllLoad "%A_ScriptDir%/AutoHotkey-HID.dll"
+
+Log(params*) {
+  FileAppend Format(params*) "`n", "*"
+}
+
+
+FunctionToCall(param1, param2) {
+  Log("FunctionToCall called with: {1} {2}", param1, param2)
+}
+
+testClass := ComObjFromPtr(DllCall("AutoHotkey-HID\CreateTestClass", "ptr"))
+testClass.TestMethod()
