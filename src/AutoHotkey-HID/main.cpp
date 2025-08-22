@@ -4,6 +4,7 @@
 #include <AutoHotkey-HID/Utils/WinApiUtils.h>
 #include <AutoHotkey-HID/Utils/ComVariantToString.h>
 #include <AutoHotkey-HID/Utils/ComUtils.h>
+#include <AutoHotkey-HID/Utils/AutoHotkeyFunction.h>
 #include <AutoHotkey-HID/TestClass.h>
 
 class CHidModule : public ATL::CAtlDllModuleT<CHidModule> {

@@ -5,7 +5,7 @@ Log(params*) {
   FileAppend Format(params*) "`n", "*"
 }
 
-FunctionToCall(param1, param2) {
+FunctionToCall(param1, param2, param3) {
   param1.Foo("Hello")
   ; Log("FunctionToCall called with: {1} {2}", param1, param2)
 }

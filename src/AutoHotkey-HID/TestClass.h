@@ -34,7 +34,7 @@ public:
   STDMETHOD(TestMethod)(IDispatch* function) override try {
     DEBUG_LOG(L"TestMethod");
     const auto& testParameter = CreateComObject<CTestParameterClass, IDispatch>();
-    CallAutoHotkeyFunction(function, testParameter);
+    AutoHotkeyFunction::Call(*function, testParameter, L"123456", L"another param");
     return S_OK;
   } CATCH_ALL_EXCEPTIONS()
 };
