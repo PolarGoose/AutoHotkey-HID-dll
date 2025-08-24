@@ -17,6 +17,7 @@
   "dependencies": [
     "boost-locale",
     "boost-utility",
-    "boost-system"
+    "boost-system",
+    "hidapi"
   ]
 }

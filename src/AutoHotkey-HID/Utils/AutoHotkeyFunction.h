@@ -10,25 +10,23 @@ public:
   }
 
 private:
-  static DISPID GetPropertyOrMethodId(IDispatch& obj, const std::wstring_view propOrMethodName) {
+  static DISPID GetPropertyOrMethodId(IDispatch& obj, const std::wstring_view methodName) {
     DISPID dispId = 0;
-    LPOLESTR lpNames[] = { const_cast<LPOLESTR>(propOrMethodName.data()) };
+    LPOLESTR lpNames[] = { const_cast<LPOLESTR>(methodName.data()) };
     THROW_IF_FAILED_MSG(
       obj.GetIDsOfNames(IID_NULL, lpNames, 1, LOCALE_USER_DEFAULT, &dispId),
-      L"IDispatch object doesn't have a property or method '{}'", propOrMethodName);
+      L"IDispatch object doesn't have a property or method '{}'", methodName);
     return dispId;
   }
 
   static CComVariant InvokeMethod(IDispatch& obj,
                                   const std::wstring_view methodOrPropertyName,
-                                  VARIANT* args = nullptr, // args must be in reverse order
+                                  VARIANT* argsInReverseOrder = nullptr,
                                   const UINT argCount = 0) {
     const auto& dispId = GetPropertyOrMethodId(obj, methodOrPropertyName);
 
     CComVariant result;
-    DISPPARAMS dispParams{};
-    dispParams.cArgs = argCount;
-    dispParams.rgvarg = args;
+    DISPPARAMS dispParams{ .rgvarg = argsInReverseOrder, .cArgs = argCount };
 
     THROW_IF_FAILED_MSG(
       obj.Invoke(dispId, IID_NULL, LOCALE_USER_DEFAULT, DISPATCH_METHOD, &dispParams, &result, nullptr, nullptr),

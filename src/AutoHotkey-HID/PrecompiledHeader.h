@@ -18,3 +18,6 @@
 // Boost
 #include <boost/noncopyable.hpp>
 #include <boost/locale.hpp>
+
+// HidApi
+#include <hid.hpp>

@@ -2,15 +2,25 @@ import "oaidl.idl";
 import "ocidl.idl";
 
 [object, uuid(C14DB170-A181-4471-9173-8A7949AE1D09), dual, nonextensible, pointer_default(unique)]
-interface ITestParameterInterface : IDispatch
+interface IHidDevice : IDispatch
 {
-  [id(1)] HRESULT Foo([in] BSTR msg);
+  [id(1), propget] HRESULT Path([out, retval] BSTR* value);
+  [id(2), propget] HRESULT VendorId([out, retval] USHORT* value);
+  [id(3), propget] HRESULT ProductId([out, retval] USHORT* value);
+  [id(4), propget] HRESULT SerialNumber([out, retval] BSTR* value);
+  [id(5), propget] HRESULT ReleaseNumber([out, retval] USHORT* value);
+  [id(6), propget] HRESULT Manufacturer([out, retval] BSTR* value);
+  [id(7), propget] HRESULT Product([out, retval] BSTR* value);
+  [id(8), propget] HRESULT UsagePage([out, retval] USHORT* value);
+  [id(9), propget] HRESULT Usage([out, retval] USHORT* value);
+  [id(10), propget] HRESULT InterfaceNumber([out, retval] LONG* value);
+  [id(11), propget] HRESULT BusType([out, retval] BSTR* value);
 };
 
 [object, uuid(563DABDD-9D1C-4865-8564-00CCB3A1777F), dual, nonextensible, pointer_default(unique)]
-interface ITestInterface : IDispatch
+interface IHidLib : IDispatch
 {
-  [id(1)] HRESULT TestMethod([in] IDispatch* function);
+  [id(1)] HRESULT GetHidDevices([out, retval] SAFEARRAY(VARIANT)* hidDevices);
 };
 
 [uuid(CD7FDE52-5F07-4C79-B473-789BF6429965), version(1.0)]
@@ -19,15 +29,15 @@ library AutoHotkeyHidLib
   importlib("stdole2.tlb");
 
   [uuid(76C3DAC8-F66E-4AED-9225-C6A9B9905B46)]
-  coclass TestClass
+  coclass HidLib
   {
-    [default] interface ITestInterface;
+    [default] interface IHidLib;
   };
 
   [uuid(ECB4DB7D-1DD1-498F-B600-3680278BEBE2)]
-  coclass TestParameterClass
+  coclass HidDevice
   {
-    [default] interface ITestParameterInterface;
+    [default] interface IHidDevice;
   };
 };
 
